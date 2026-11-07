@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 34" width="160" height="34">
+  <rect x="0" y="0" width="34" height="34" rx="9" fill="#ffffff"/>
+  <circle cx="17" cy="17" r="8" fill="none" stroke="#4f46e5" stroke-width="2.5"/>
+  <path d="M17 9 A8 8 0 0 1 25 17 L17 17 Z" fill="#4f46e5"/>
+  <text x="44" y="23.5" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">SegmenKu</text>
+</svg>

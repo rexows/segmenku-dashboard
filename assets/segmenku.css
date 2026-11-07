@@ -1,0 +1,653 @@
+/* ==========================================================================
+   SegmenKu — Design Tokens & Base Styles
+   Sumber: Figma "Segmen Pelanggan (Copy)" — 4 halaman:
+   01 Dashboard, 02 Unggah Data, 03 Pelanggan, 04 Detail Segmen
+   Font: Inter (Regular 400, Medium 500, SemiBold 600, Bold 700, ExtraBold 800)
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  /* ---------- Warna utama (brand) ---------- */
+  --color-primary: #4f46e5;              /* tombol, kartu aktif, menu aktif, chart */
+  --color-primary-soft: rgba(79, 70, 229, 0.13); /* badge Champions, ikon XLS */
+  --color-primary-light: #eef0ff;        /* header tabel, input, track bar, tombol sekunder */
+  --color-primary-border: #c7c9f5;       /* border dropzone & kartu detail */
+
+  /* Sidebar (gradien atas → bawah) */
+  --color-sidebar-start: #5145e8;
+  --color-sidebar-end: #3026c8;
+  --gradient-sidebar: linear-gradient(180deg, var(--color-sidebar-start) 0%, var(--color-sidebar-end) 100%);
+
+  /* ---------- Latar & permukaan ---------- */
+  --color-bg-page: #f2f3ff;              /* latar halaman */
+  --color-surface: #ffffff;              /* kartu / panel */
+  --color-border: #e5e7f5;               /* border kartu file & garis pemisah */
+
+  /* ---------- Teks ---------- */
+  --color-text: #171735;                 /* judul & teks utama */
+  --color-text-muted: #626783;           /* subjudul, label, keterangan */
+  --color-text-on-primary: #ffffff;
+
+  /* ---------- Status ---------- */
+  --color-success-text: #4d7c0f;         /* "▲ 5,6% dibanding bulan lalu" */
+  --color-done: #0d9467;                 /* status "Selesai" riwayat unggahan */
+
+  /* ---------- Warna segmen RFM ---------- */
+  --segment-champions: #4f46e5;
+  --segment-champions-bg: rgba(79, 70, 229, 0.13);
+  --segment-loyal: #0ea5e9;
+  --segment-loyal-bg: rgba(14, 165, 233, 0.13);
+  --segment-potensial: #10b981;
+  --segment-potensial-bg: rgba(16, 185, 129, 0.13);
+  --segment-berisiko: #f59e0b;
+  --segment-berisiko-bg: rgba(245, 158, 11, 0.13);
+  --segment-tidak-aktif: #ef4444;
+  --segment-tidak-aktif-bg: rgba(239, 68, 68, 0.13);
+
+  /* Warna tipe file (Unduh Hasil) */
+  --file-csv: var(--segment-potensial);
+  --file-csv-bg: var(--segment-potensial-bg);
+  --file-xls: var(--color-primary);
+  --file-xls-bg: var(--color-primary-soft);
+  --file-pdf: var(--segment-tidak-aktif);
+  --file-pdf-bg: var(--segment-tidak-aktif-bg);
+
+  /* ---------- Tipografi ---------- */
+  --font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --fs-page-title: 26px;   /* ExtraBold — judul halaman */
+  --fs-metric: 27px;       /* ExtraBold — angka kartu metrik */
+  --fs-donut: 22px;        /* ExtraBold — angka tengah donut */
+  --fs-brand: 18px;        /* Bold — "SegmenKu" */
+  --fs-dropzone: 16px;     /* Bold — teks dropzone */
+  --fs-card-title: 15px;   /* Bold — judul kartu */
+  --fs-body: 13px;         /* subjudul halaman, menu */
+  --fs-sm: 12px;           /* tombol, label metrik */
+  --fs-xs: 11px;           /* subjudul kartu, nama di tabel */
+  --fs-xxs: 10px;          /* sel tabel, badge, keterangan */
+  --fs-tiny: 9px;          /* label tipe file */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* ---------- Radius ---------- */
+  --radius-card: 15px;
+  --radius-card-lg: 16px;  /* kartu detail pelanggan */
+  --radius-dropzone: 14px;
+  --radius-badge: 12px;    /* badge segmen & kartu info sidebar */
+  --radius-md: 10px;       /* menu sidebar, item file */
+  --radius-btn: 9px;       /* tombol & input */
+  --radius-sm: 8px;        /* header tabel, pagination */
+  --radius-xs: 6px;        /* chip nama kolom */
+  --radius-bar: 4px;       /* progress bar */
+  --radius-full: 999px;    /* avatar, titik legenda, step */
+
+  /* ---------- Ukuran layout ---------- */
+  --sidebar-width: 230px;
+  --content-padding-x: 40px;
+  --gap-card: 16px;        /* jarak antar kartu metrik */
+  --gap-section: 20px;     /* jarak antar section */
+  --card-padding: 22px;
+  --btn-height: 38px;
+  --input-height: 42px;
+  --table-row-height: 49px;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--fs-body);
+  color: var(--color-text);
+  background: var(--color-bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  padding: 37px var(--content-padding-x) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-section);
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background: var(--gradient-sidebar);
+  color: var(--color-text-on-primary);
+  padding: 22px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 4px;
+  font-size: var(--fs-brand);
+  font-weight: var(--fw-bold);
+}
+
+.sidebar__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-btn);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  font-weight: var(--fw-bold);
+}
+
+.sidebar__label {
+  margin: 25px 0 18px 12px;
+  font-size: var(--fs-xxs);
+  font-weight: var(--fw-medium);
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 16px;
+  margin-bottom: 8px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-on-primary);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+}
+
+.sidebar__link.is-active {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+}
+
+.sidebar__info {
+  margin-top: auto;
+  background: var(--color-surface);
+  border-radius: var(--radius-badge);
+  padding: 16px 14px;
+}
+
+.sidebar__info-title {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+
+.sidebar__info-text {
+  margin-top: 8px;
+  font-size: var(--fs-xxs);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Header halaman ---------- */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.page-title {
+  font-size: var(--fs-page-title);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text);
+}
+
+.page-subtitle {
+  margin-top: 8px;
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Komponen
+   ========================================================================== */
+
+/* ---------- Kartu ---------- */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: var(--card-padding);
+}
+
+.card--outlined {
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-card-lg);
+}
+
+.card__title {
+  font-size: var(--fs-card-title);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+
+.card__subtitle {
+  margin-top: 8px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Kartu metrik ---------- */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-card);
+}
+
+.metric {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: 15px 18px;
+  min-height: 112px;
+}
+
+.metric__label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-muted);
+}
+
+.metric__value {
+  margin-top: 8px;
+  font-size: var(--fs-metric);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text);
+}
+
+.metric__trend {
+  margin-top: 10px;
+  font-size: var(--fs-xxs);
+  font-weight: var(--fw-medium);
+  color: var(--color-success-text);
+}
+
+/* Kartu metrik yang di-highlight (ungu) */
+.metric--primary {
+  background: var(--color-primary);
+}
+
+.metric--primary .metric__label,
+.metric--primary .metric__value,
+.metric--primary .metric__trend {
+  color: var(--color-text-on-primary);
+}
+
+/* ---------- Tombol ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: var(--btn-height);
+  padding: 0 18px;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.btn--secondary {
+  background: var(--color-primary-light);
+  color: var(--color-text);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* ---------- Input / select ---------- */
+.field__label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+}
+
+.input,
+.select {
+  width: 100%;
+  height: var(--input-height);
+  padding: 0 14px;
+  border: none;
+  border-radius: var(--radius-btn);
+  background: var(--color-primary-light);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ---------- Dropzone unggah ---------- */
+.dropzone {
+  min-height: 178px;
+  border: 2px solid var(--color-primary-border);
+  border-radius: var(--radius-dropzone);
+  background: var(--color-primary-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropzone__icon {
+  font-size: 38px;
+  font-weight: var(--fw-bold);
+  color: var(--color-primary);
+}
+
+.dropzone__title {
+  margin-top: 8px;
+  font-size: var(--fs-dropzone);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+
+.dropzone__hint {
+  margin-top: 12px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Langkah (stepper) ---------- */
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+}
+
+.step__number {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-light);
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+}
+
+.step.is-active {
+  color: var(--color-text);
+}
+
+.step.is-active .step__number {
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.step__line {
+  width: 60px;
+  height: 2px;
+  background: var(--color-border);
+}
+
+/* ---------- Tabel ---------- */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--fs-xxs);
+}
+
+.table thead th {
+  background: var(--color-primary-light);
+  height: 38px;
+  padding: 0 10px;
+  text-align: left;
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+}
+
+.table thead th:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.table thead th:last-child  { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+
+.table tbody td {
+  height: var(--table-row-height);
+  padding: 0 10px;
+  border-bottom: 1px solid var(--color-border);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+}
+
+.table__id {
+  font-weight: var(--fw-regular);
+  color: var(--color-text-muted) !important;
+}
+
+.table__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+}
+
+.table tbody tr:hover td {
+  background: var(--color-bg-page);
+  cursor: pointer;
+}
+
+/* ---------- Avatar ---------- */
+.avatar {
+  width: 27px;
+  height: 27px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+  display: inline-grid;
+  place-items: center;
+  font-size: var(--fs-xxs);
+  font-weight: var(--fw-bold);
+  flex-shrink: 0;
+}
+
+.avatar--lg {
+  width: 44px;
+  height: 44px;
+  font-size: var(--fs-sm);
+}
+
+/* ---------- Badge segmen ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  height: 23px;
+  padding: 0 12px;
+  border-radius: var(--radius-badge);
+  font-size: var(--fs-xxs);
+  font-weight: var(--fw-semibold);
+}
+
+.badge--champions   { background: var(--segment-champions-bg);   color: var(--segment-champions); }
+.badge--loyal       { background: var(--segment-loyal-bg);       color: var(--segment-loyal); }
+.badge--potensial   { background: var(--segment-potensial-bg);   color: var(--segment-potensial); }
+.badge--berisiko    { background: var(--segment-berisiko-bg);    color: var(--segment-berisiko); }
+.badge--tidak-aktif { background: var(--segment-tidak-aktif-bg); color: var(--segment-tidak-aktif); }
+
+/* Warna solid per segmen (avatar, titik legenda, isi bar) */
+.bg-champions   { background: var(--segment-champions); }
+.bg-loyal       { background: var(--segment-loyal); }
+.bg-potensial   { background: var(--segment-potensial); }
+.bg-berisiko    { background: var(--segment-berisiko); }
+.bg-tidak-aktif { background: var(--segment-tidak-aktif); }
+
+/* ---------- Legenda & progress bar ---------- */
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+.progress {
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-bar);
+  background: var(--color-primary-light);
+  overflow: hidden;
+}
+
+.progress__fill {
+  height: 100%;
+  border-radius: var(--radius-bar);
+  background: var(--color-primary);
+}
+
+.progress--lg {
+  height: 7px;
+}
+
+/* ---------- Item file unduhan ---------- */
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  height: 48px;
+  padding: 0 13px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.file-item__type {
+  width: 36px;
+  height: 30px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-bold);
+}
+
+.file-item__type--csv { background: var(--file-csv-bg); color: var(--file-csv); }
+.file-item__type--xls { background: var(--file-xls-bg); color: var(--file-xls); }
+.file-item__type--pdf { background: var(--file-pdf-bg); color: var(--file-pdf); }
+
+.file-item__name {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+
+.file-item__meta {
+  margin-top: 4px;
+  font-size: var(--fs-tiny);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Chip nama kolom ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--radius-xs);
+  background: var(--color-primary-light);
+  font-size: var(--fs-xxs);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+}
+
+/* ---------- Status ---------- */
+.status-done {
+  font-size: var(--fs-xxs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-done);
+}
+
+/* ---------- Pagination ---------- */
+.pagination {
+  display: flex;
+  gap: 6px;
+}
+
+.pagination__item {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-light);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: var(--fs-xxs);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+}
+
+.pagination__item.is-active {
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+/* ---------- Divider ---------- */
+.divider {
+  height: 1px;
+  border: none;
+  background: var(--color-border);
+  margin: 0;
+}
+
+/* ---------- Utilitas teks ---------- */
+.text-muted   { color: var(--color-text-muted); }
+.text-primary { color: var(--color-primary); }
+.text-success { color: var(--color-success-text); }

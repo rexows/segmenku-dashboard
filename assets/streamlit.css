@@ -1,0 +1,210 @@
+/* ==========================================================================
+   SegmenKu — penyesuaian tampilan Streamlit
+   Dipasang setelah segmenku.css. Semua warna memakai token dari segmenku.css.
+   ========================================================================== */
+
+/* ---------- Font & latar ---------- */
+.stApp,
+.stApp p,
+.stApp label,
+.stApp input,
+.stApp textarea,
+.stApp button,
+.stApp li,
+.stApp span:not([data-testid="stIconMaterial"]) {
+  font-family: var(--font-family);
+}
+
+.stApp { background: var(--color-bg-page); color: var(--color-text); }
+
+/* Lebar & jarak konten utama */
+.block-container {
+  max-width: 1440px;
+  padding-top: 2.3rem;
+  padding-bottom: 3rem;
+  padding-left: max(2.5rem, env(safe-area-inset-left, 0px));
+  padding-right: max(2.5rem, env(safe-area-inset-right, 0px));
+}
+
+/* Sembunyikan menu & footer bawaan Streamlit */
+#MainMenu, footer, [data-testid="stDecoration"] { visibility: hidden; }
+header[data-testid="stHeader"] { background: transparent; }
+
+/* ---------- Sidebar ---------- */
+[data-testid="stSidebar"] {
+  background: var(--gradient-sidebar);
+  min-width: var(--sidebar-width) !important;
+  max-width: var(--sidebar-width) !important;
+}
+[data-testid="stSidebar"] * { color: var(--color-text-on-primary); }
+[data-testid="stSidebarNav"] a {
+  border-radius: var(--radius-md);
+  padding: 0.55rem 1rem;
+  margin-bottom: 4px;
+}
+[data-testid="stSidebarNav"] a:hover { background: rgba(255, 255, 255, 0.12); }
+[data-testid="stSidebarNav"] a[aria-current="page"] { background: var(--color-surface); }
+[data-testid="stSidebarNav"] a[aria-current="page"] * {
+  color: var(--color-primary) !important;
+  font-weight: var(--fw-semibold);
+}
+[data-testid="stSidebarNav"] span { font-size: var(--fs-body); }
+[data-testid="stSidebar"] .sidebar__info * { color: inherit; }
+[data-testid="stSidebar"] .sidebar__info-title { color: var(--color-text); }
+[data-testid="stSidebar"] .sidebar__info-text { color: var(--color-text-muted); }
+[data-testid="stSidebar"] .sidebar__info { margin-top: 1.5rem; }
+
+/* ---------- Kartu putih untuk container yang berisi widget ----------
+   Setiap kartu diawali <span class="card-marker">. Aturan ini memilih
+   container terdalam yang memuat penanda tersebut. */
+[data-testid="stVerticalBlockBorderWrapper"]:has(.card-marker):not(:has([data-testid="stVerticalBlockBorderWrapper"] .card-marker)) {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: var(--card-padding);
+}
+.card-marker { display: none; }
+
+/* Hilangkan jarak ekstra dari elemen HTML kosong */
+.stHtml:has(> .card-marker) { display: none; }
+
+/* ---------- Header halaman ---------- */
+.page-header-text { padding-bottom: 0.25rem; }
+
+/* ---------- Kartu & judul ---------- */
+.card-head { margin-bottom: 14px; }
+.card__subtitle { margin-bottom: 0; }
+
+.metric__value, .table td, .legend-row__value, .num { font-variant-numeric: tabular-nums; }
+
+/* ---------- Distribusi segmen ---------- */
+.dist {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  margin-top: 8px;
+}
+.donut { position: relative; width: 170px; height: 170px; }
+.donut svg { width: 100%; height: 100%; display: block; }
+.donut__center {
+  position: absolute; inset: 0;
+  display: grid; place-content: center; text-align: center;
+  pointer-events: none;
+}
+.donut__value { font-size: var(--fs-donut); font-weight: var(--fw-extrabold); color: var(--color-text); }
+.donut__label { font-size: var(--fs-xxs); color: var(--color-text-muted); margin-top: 2px; }
+
+.legend { display: flex; flex-direction: column; gap: 14px; }
+.legend-row {
+  display: grid;
+  grid-template-columns: 9px 84px minmax(60px, 1fr) 48px 34px;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--fs-xs);
+  color: var(--color-text);
+}
+.legend-row__name { font-weight: var(--fw-medium); }
+.legend-row__value { font-weight: var(--fw-bold); text-align: right; }
+.legend-row__pct { font-size: var(--fs-xxs); color: var(--color-text-muted); text-align: right; }
+
+/* ---------- Grafik ---------- */
+.histo { width: 100%; height: auto; display: block; overflow: visible; font-family: var(--font-family); }
+
+/* ---------- Tabel HTML ---------- */
+.table-wrap { overflow-x: auto; }
+.table { min-width: 720px; }
+.table td.r, .table th.r { text-align: right; }
+.table td.c, .table th.c { text-align: center; }
+.table .badge { min-width: 96px; }
+.table tbody tr:hover td { cursor: default; }
+.score { font-weight: var(--fw-semibold); letter-spacing: 0.04em; color: var(--color-text-muted); }
+
+/* ---------- Tabel interaktif (st.dataframe) ---------- */
+[data-testid="stDataFrame"] {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+/* ---------- Unduh hasil ---------- */
+.file-item { margin-bottom: 0; }
+.file-item__text { min-width: 0; }
+
+/* ---------- Tombol & input Streamlit ---------- */
+.stButton button,
+.stDownloadButton button,
+[data-testid="stPageLink"] a {
+  border-radius: var(--radius-btn);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
+  min-height: var(--btn-height);
+}
+.stButton button[kind="secondary"],
+.stDownloadButton button[kind="secondary"] {
+  background: var(--color-primary-light);
+  border: none;
+  color: var(--color-text);
+}
+[data-testid="stTextInput"] input,
+[data-baseweb="select"] > div {
+  border-radius: var(--radius-btn);
+  min-height: var(--input-height);
+  border: none;
+}
+.stTextInput label, .stSelectbox label, [data-testid="stWidgetLabel"] p {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+}
+
+/* File uploader bergaya dropzone */
+[data-testid="stFileUploaderDropzone"] {
+  background: var(--color-primary-light);
+  border: 2px solid var(--color-primary-border);
+  border-radius: var(--radius-dropzone);
+  min-height: 150px;
+}
+
+/* ---------- Unggah data ---------- */
+.steps { margin-bottom: 4px; }
+.chips { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 12px; }
+.info-text { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.6; }
+.info-text--sm { font-size: var(--fs-xs); }
+.history { display: flex; flex-direction: column; margin-top: 10px; }
+.history__item {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 14px 0; border-bottom: 1px solid var(--color-border);
+}
+.history__name { font-size: var(--fs-xs); font-weight: var(--fw-semibold); overflow-wrap: anywhere; color: var(--color-text); }
+.history__meta { margin-top: 6px; font-size: var(--fs-xxs); color: var(--color-text-muted); }
+
+/* ---------- Detail segmen ---------- */
+.advice { font-size: var(--fs-body); line-height: 1.6; margin-top: 12px; max-width: 70ch; color: var(--color-text); }
+.detail-head { display: flex; align-items: center; gap: 13px; margin-top: 18px; }
+.detail-name { font-size: var(--fs-card-title); font-weight: var(--fw-bold); color: var(--color-text); }
+.detail-sub { font-size: var(--fs-xxs); color: var(--color-text-muted); margin-top: 6px; }
+.detail-bars { display: flex; flex-direction: column; gap: 18px; margin-top: 26px; }
+.detail-bar {
+  display: grid; grid-template-columns: 82px minmax(0, 1fr) 16px;
+  align-items: center; gap: 12px; font-size: var(--fs-xs);
+}
+.detail-bar__label { color: var(--color-text-muted); }
+.detail-bar__val { font-weight: var(--fw-bold); text-align: right; color: var(--color-text); }
+.detail-facts { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; font-size: var(--fs-xs); }
+.detail-fact { display: flex; justify-content: space-between; gap: 10px; color: var(--color-text); }
+.detail-fact span:first-child { color: var(--color-text-muted); }
+.detail-fact span:last-child { font-weight: var(--fw-semibold); font-variant-numeric: tabular-nums; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 1100px) {
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .block-container {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+  .metrics { grid-template-columns: minmax(0, 1fr); }
+  .dist { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .legend { width: 100%; }
+  .page-title { font-size: 22px; }
+}
