@@ -1,4 +1,5 @@
 # SegmenKu — Dashboard Segmentasi Pelanggan (RFM)
+Website Streamlitnya = https://segmenku-dashboard.streamlit.app/
 
 Dashboard Streamlit untuk mengelompokkan pelanggan dengan metode **RFM**
 (Recency, Frequency, Monetary). Tampilan mengikuti desain Figma SegmenKu.
